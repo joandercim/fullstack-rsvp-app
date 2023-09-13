@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(240, 240, 240);
+}
+
+.container {
+    max-width: 1000px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: rgb(240, 240, 240);
+    filter: drop-shadow(20px 20px 20px rgba(0, 0, 0, 0.121));
+}
+
+h1 {
+    margin: 0;
+}
+
+form {
+    text-align: left;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-fields {
+    text-emphasis: left;
+}
+
+input#name {
+    margin: 10px 0;
+}
+
+input[type="submit"] {
+    padding: 5px;
+    margin: 10px 0;
+}
+
+input[type="radio"] {
+    margin: 5px; 
+}

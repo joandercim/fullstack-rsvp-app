@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="script/script.js" defer type="module"></script>
+    <title>Anmälan After School</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Anmälan After School</h1>
+    <h2>2023-10-05</h2>
+
+    <form action="submit" id="form" method="post">
+        <div class="form-fields">
+            <label for="name">Ditt namn</label>
+            <input type="text" name="name" id="name" required>
+            <br>
+            <label for="veg">Veganskt</label>
+            <input type="radio" name="food-type" id="vegan" required>
+            <br>
+            <label for="vegan">Vegetarisk</label>
+            <input type="radio" name="food-type" id="vegetarisk">
+            <br>
+            <label for="meat">Kött</label>
+            <input type="radio" name="food-type" id="meat">
+        </div>
+        <input type="submit" value="submit" id="submit-btn">
+    </form>
+  </div>  
+</body>
+</html>
