@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Person = require('../models/Person');
 
 const peopleArray = [
   {
@@ -20,48 +21,51 @@ const peopleArray = [
 ];
 
 // Get all people
-router.get('/', (req, res) => {
-  res.json({ success: true, data: peopleArray });
+router.get('/', async (req, res) => {
+  try {
+    const people = await Person.find();
+    res.json({ success: true, data: people });
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ success: false, error: 'Something went wrong' });
+  }
 });
 
 // Get one person
-router.get('/:id', (req, res) => {
-  const person = peopleArray.find((person) => person.id === +req.params.id);
-
-  if (!person) {
-    return res
-      .status(404)
-      .json({ success: false, error: 'Resource not found' });
-  }
-  res.json({ success: true, data: person });
+router.get('/:id', async (req, res) => {
+   try {
+     const person = await Person.findById(req.params.id);
+     res.json({ success: true, data: person });
+   } catch (error) {
+    console.log(error)
+    res.status(500).json({ success: false, error: 'Something went wrong' });
+   }
 });
 
 // Add new person
-router.post('/', (req, res) => {
-  const person = {
-    id: peopleArray.length + 1,
+router.post('/', async (req, res) => {
+  const person = new Person({
     name: req.body.name,
-    foodType: req.body.foodType,
-  };
+    foodType: req.body.foodType
+  });
 
-  peopleArray.push(person);
-
-  res.json({ success: true, data: person });
+  try {
+    const savedPerson = await person.save();
+    res.json({ success: true, data: savedPerson });
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ success: false, error: 'Something went wrong' });
+  }
 });
 
 // Remove person
-router.delete('/:id', (req, res) => {
-  const person = peopleArray.find((person) => person.id === +req.params.id);
-
-  if (!person) {
-    return res
-      .status(404)
-      .json({ success: false, error: 'Resource not found' });
-    }
-
-    const index = peopleArray.indexOf(person);
-
-    peopleArray.splice(index, 1);
+router.delete('/:id', async (req, res) => {
+  try {
+    await Person.findByIdAndDelete(req.params.id);
     res.json({ success: true, data: {} });
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ success: false, error: 'Something went wrong' });
+  }    
 });
 module.exports = router;
